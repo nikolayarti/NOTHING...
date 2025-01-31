@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Простая страница</title>
+    <style>
+        body {
+            background-color: #242424;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #353535;
+            padding: 50px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-left: 50px;
+            margin-right: 50px;
+        }
+        input[type="number"] {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #464242;
+            border-radius: 3px;
+            width: 92%;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: transparent;
+            color: #fff;
+            border: white;
+            border-style: solid;
+            border-radius: 8px;
+            cursor: pointer;
+            transition-delay: 15ms;
+        }
+        button:hover {
+            transition-delay: 15ms;
+            background-color: #ffffff;
+            color: #222222;
+        }
+
+        .telegram-message {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #202020;
+            border-radius: 5px;
+            color: #ffffff;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id = "main">
+        <h1>Описание: 🎟️</h1>
+        <p>
+            Добро пожаловать на нашу страницу розыгрыша билетов! Здесь вы можете приобрести билеты для участия в нашем захватывающем розыгрыше. 
+            Пожалуйста, введите количество билетов, которые вы желаете купить, в поле ниже. 
+            Убедитесь, что вы вводите только числовые данные. После ввода нажмите кнопку "Отправить",
+             чтобы получить счёт. Удачи! 🍀</p>
+        <div id="div_blyat">
+            <input id="tickets" type="number" placeholder="Введите количество билетов" min="0">
+            <button id="submit">Отправить</button>
+        </div>
+
+        <div class="telegram-message" id="telegram">
+            Пожалуйста, вернитесь обратно в Telegram, чтобы оплатить счёт.
+        </div>
+    </div>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+
+        let submit = document.getElementById("submit");
+       
+        submit.addEventListener("click", () => {
+            let tickets = document.getElementById("tickets");
+            if(tickets.value > 0)
+            document.getElementById("telegram").style.display = 'block';
+            document.getElementById("div_blyat").style.display = 'none';
+
+            let data = {
+                count : tickets.value
+            }
+            tg.sendData(JSON.stringify(data));
+        })
+        
+    </script>
+<body>
